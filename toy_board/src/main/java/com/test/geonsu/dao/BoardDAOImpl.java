@@ -1,5 +1,7 @@
 package com.test.geonsu.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -19,7 +21,7 @@ public class BoardDAOImpl implements BoardDAO{
 		sql.insert("board.write",vo);		
 	}
 	
-	//조회
+	//상세
 	@Override
 	public BoardVO read(int bno) {
 		return sql.selectOne("board.read",bno);
@@ -35,6 +37,11 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
 	public void delete(int bno) {
 		sql.delete("board.delete",bno);		
+	}
+
+	@Override
+	public List<BoardVO> list() {
+		return sql.selectList("board.list");
 	}
 
 	

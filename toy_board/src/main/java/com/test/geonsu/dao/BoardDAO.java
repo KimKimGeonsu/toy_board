@@ -1,5 +1,7 @@
 package com.test.geonsu.dao;
 
+import java.util.List;
+
 import com.test.geonsu.domain.BoardVO;
 
 public interface BoardDAO {
@@ -7,7 +9,7 @@ public interface BoardDAO {
 	//작성
 	public void write(BoardVO vo);
 	
-	//조회
+	//상세
 	public BoardVO read(int bno);
 	
 	//수정
@@ -15,5 +17,8 @@ public interface BoardDAO {
 	
 	//삭제
 	public void delete(int bno);
+	
+	//조회
+	public List<BoardVO> list();
 
 }

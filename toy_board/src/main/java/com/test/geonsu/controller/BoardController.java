@@ -2,9 +2,11 @@ package com.test.geonsu.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +40,27 @@ public class BoardController {
 		
 		return "redirect:/";
 	}
+	
+	//글목록
+	@RequestMapping(value = "/list",method = RequestMethod.GET)
+	public void list(Model model,HttpServletRequest req) {
+		System.out.println(req.getRequestURL());
+		logger.info("get 조회");	
+		List<BoardVO> list = service.list();
+		model.addAttribute("list", list);			
+	}
+	
+	//글상세
+	@RequestMapping(value = "/read",method = RequestMethod.GET)
+	public void getRead(int bno, Model model) {
+		logger.info("get 글 상세");
+		BoardVO vo = service.read(bno);
+		model.addAttribute("read",vo);
+	}
+	
+	
+	
+	
 	
 	
 }

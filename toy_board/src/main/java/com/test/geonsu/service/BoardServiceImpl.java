@@ -1,5 +1,7 @@
 package com.test.geonsu.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -19,7 +21,7 @@ public class BoardServiceImpl implements BoardService{
 		dao.write(vo);		
 	}
 	
-	//조회
+	//상세
 	@Override
 	public BoardVO read(int bno) {
 		return dao.read(bno);
@@ -36,6 +38,12 @@ public class BoardServiceImpl implements BoardService{
 	public void delete(int bno) {
 		dao.delete(bno);
 		
+	}
+
+	//조회
+	@Override
+	public List<BoardVO> list() {	
+		return dao.list();
 	}
 	
 

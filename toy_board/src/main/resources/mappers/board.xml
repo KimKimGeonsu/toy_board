@@ -5,10 +5,10 @@
   <!-- 작성 -->
  <insert id="write">
   insert into myBoard(bno, title, content, writer)
-      values (myBoard_seq.nextval, #{title}, #{content}, #{writer})
+      values ((select nvl(max(bno)+1,1) from myboard), #{title}, #{content}, #{writer})
  </insert>
  
- <!-- 조회 -->
+ <!-- 상세 -->
  <select id="read" resultType="board">
   select bno, title, content, writer, regDate, viewCnt
    from myBoard
@@ -30,5 +30,12 @@
    myBoard
   where bno = #{bno}
  </delete>
+ 
+  <!-- 목록 -->
+ <select id="list" resultType="board">
+  select bno, title, writer, regDate
+      from myBoard
+          order by bno desc
+ </select>
  
 </mapper>

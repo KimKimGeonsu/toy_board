@@ -8,7 +8,7 @@
 		
 		
  <!-- 오라클 접속 -->
-    <bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource" >
+    <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource" >
         <property value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" name="driverClassName"/>
         <property value="jdbc:log4jdbc:oracle:thin:@localhost:1521/XE" name="url"/>
         <property value="geonsu_board" name="username"/>
