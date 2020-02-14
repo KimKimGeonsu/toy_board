@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.test.geonsu.domain.BoardVO;
+import com.test.geonsu.domain.Criteria;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO{
@@ -39,9 +40,16 @@ public class BoardDAOImpl implements BoardDAO{
 		sql.delete("board.delete",bno);		
 	}
 
+	//리스트
 	@Override
-	public List<BoardVO> list() {
-		return sql.selectList("board.list");
+	public List<BoardVO> list(Criteria cri) {
+		return sql.selectList("board.listpage",cri);
+	}
+
+	//게시물 총갯수
+	@Override
+	public int listCount() { 
+		return sql.selectOne("board.listCount");
 	}
 
 	

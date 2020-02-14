@@ -3,6 +3,7 @@ package com.test.geonsu.service;
 import java.util.List;
 
 import com.test.geonsu.domain.BoardVO;
+import com.test.geonsu.domain.Criteria;
 
 public interface BoardService {
 	
@@ -19,6 +20,9 @@ public interface BoardService {
 	public void delete(int bno);
 	
 	//조회
-	public List<BoardVO> list();
+	public List<BoardVO> list(Criteria cri);
+	
+	//게시물갯수
+	public int listCount();
 
 }

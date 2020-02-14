@@ -2,22 +2,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
- <title>kuzuro 게시판</title>
+ <title> 게시판</title>
 </head>
 <body>
 
 <div id="root">
- <header>
-  <h1>kuzuro 게시판</h1>
- </header>
-
-<hr />
- 
- <nav>
-  처음화면 - 글쓰기 - 로그인
- </nav>
-
-<hr />
+ 	<header>
+			<%@include file="../include/header.jsp" %>
+		</header>
+		<hr />
+		<%@include file="../include/nav.jsp" %>
+		<hr />
 
  <section id="container">
  
@@ -40,9 +35,9 @@
 
 <hr />
 
- <footer>
-  <p>만든이 : kuzuro</p>  
- </footer>
+	<footer>
+			<%@include file="../include/footer.jsp" %>
+		</footer>
 
 </div>
 

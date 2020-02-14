@@ -38,4 +38,17 @@
           order by bno desc
  </select>
  
+ <select id="listpage" resultType="board" parameterType="cri">
+ select bno, title, content, writer, regdate, viewcnt from( select bno, title, content, writer, regdate, viewcnt, 
+      row_number() over(order by bno desc) as rnum 
+      from myboard) mb where rnum between #{rowStart} and #{rowEnd}
+      order by bno desc
+ </select>
+ 
+ <select id="listCount" resultType="int">
+ <![CDATA[
+ 	select count(bno) from myboard where bno>0
+ ]]>
+ </select>
+ 
 </mapper>

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.test.geonsu.domain.BoardVO;
+import com.test.geonsu.domain.Criteria;
+import com.test.geonsu.domain.PageMaker;
 import com.test.geonsu.service.BoardService;
 
 
@@ -43,11 +45,15 @@ public class BoardController {
 	
 	//글목록
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
-	public void list(Model model,HttpServletRequest req) {
-		System.out.println(req.getRequestURL());
+	public void list(Model model,Criteria cri) {		
 		logger.info("get 조회");	
-		List<BoardVO> list = service.list();
-		model.addAttribute("list", list);			
+		List<BoardVO> list = service.list(cri);
+		model.addAttribute("list", list);
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.listCount());
+		model.addAttribute("pageMaker",pageMaker);
 	}
 	
 	//글상세
@@ -58,7 +64,41 @@ public class BoardController {
 		model.addAttribute("read",vo);
 	}
 	
+	//글 수정
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public void getModify(Model model, int bno) {
+		logger.info("get 수정");		
+		System.out.println(bno);
+		BoardVO vo = service.read(bno);	
+		System.out.println("mdofiy"+vo);
+		model.addAttribute("modify", vo);
+		
+	}
 	
+	//글수정post
+	@RequestMapping(value = "/modify",method = RequestMethod.POST)
+	public String postModify(BoardVO vo) {
+		logger.info("post 수정");
+		System.out.println(vo);
+		service.update(vo);
+		
+		return "redirect:/board/list";
+	}
+	
+	//글삭제
+//	@RequestMapping(value = "/delete",method = RequestMethod.GET)
+//	public void getDelete(int bno, Model model) {
+//		logger.info("get 삭제");
+//		model.addAttribute("delete",bno);
+//	}
+	
+	//글삭제 post 
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public String postDelete(int bno) {
+		logger.info("post delete");		
+		service.delete(bno);
+		return "redirect:/board/list";
+	}
 	
 	
 	

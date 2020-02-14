@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.test.geonsu.dao.BoardDAO;
 import com.test.geonsu.domain.BoardVO;
+import com.test.geonsu.domain.Criteria;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -42,8 +43,14 @@ public class BoardServiceImpl implements BoardService{
 
 	//조회
 	@Override
-	public List<BoardVO> list() {	
-		return dao.list();
+	public List<BoardVO> list(Criteria cri) {	
+		return dao.list(cri);
+	}
+
+	//게시물갯수
+	@Override
+	public int listCount() {
+		return dao.listCount();
 	}
 	
 
