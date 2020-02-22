@@ -1,5 +1,12 @@
 package com.test.geonsu.domain;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import javax.sound.sampled.AudioFormat.Encoding;
+import javax.xml.crypto.URIReferenceException;
+
+import org.apache.ibatis.executor.ReuseExecutor;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -58,8 +65,7 @@ public class PageMaker {
 		System.out.println("엔드페이지"+endPage);
 		startPage = (endPage - displayPageNum) + 1;
 
-		int tempEndPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum()));
-		System.out.println("템프페이지"+tempEndPage);
+		int tempEndPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum()));		
 		if (endPage > tempEndPage) {
 			endPage = tempEndPage;
 		}
@@ -78,6 +84,28 @@ public class PageMaker {
 	   .build();
 	   System.out.println("uricomponents"+uriComponents);
 	 return uriComponents.toUriString();
+	}
+	
+	public String makeSearch(int page)
+	{
+		UriComponents uriComponents =
+				UriComponentsBuilder.newInstance()
+				.queryParam("page",page)
+				.queryParam("perPageNum",cri.getPerPageNum())
+				.queryParam("searchType", ((SearchCriteria)cri).getSearchType())
+				.queryParam("keyword",encoding(((SearchCriteria)cri).getKeyword()))
+				.build();
+				return uriComponents.toUriString();
+	}
+	
+	private String encoding(String keyword) {		
+		if(keyword ==null || keyword.trim().length() ==0)
+		{return "";}
+		try {
+			return URLEncoder.encode(keyword, "UTF-8");
+		}catch (UnsupportedEncodingException e) {
+			return "";
+		}
 	}
 	
 	

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.test.geonsu.domain.BoardVO;
 import com.test.geonsu.domain.Criteria;
+import com.test.geonsu.domain.SearchCriteria;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO{
@@ -50,6 +51,18 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
 	public int listCount() { 
 		return sql.selectOne("board.listCount");
+	}
+	
+	//게시물 검색결과
+	@Override
+	public List<BoardVO> listSearch(SearchCriteria scri) {
+		return sql.selectList("board.listSearch", scri);
+	}
+	
+	//게시물 검색갯수
+	@Override
+	public int countSearch(SearchCriteria scri) {
+		return sql.selectOne("board.countSearch",scri);
 	}
 
 	

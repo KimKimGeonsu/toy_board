@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.test.geonsu.dao.BoardDAO;
 import com.test.geonsu.domain.BoardVO;
 import com.test.geonsu.domain.Criteria;
+import com.test.geonsu.domain.SearchCriteria;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -51,6 +52,18 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int listCount() {
 		return dao.listCount();
+	}
+
+	//검색결과
+	@Override
+	public List<BoardVO> listSearch(SearchCriteria scri) {	
+		return dao.listSearch(scri);
+	}
+	
+	//검색결과 갯수
+	@Override
+	public int countSearch(SearchCriteria scri) {
+		return dao.countSearch(scri);
 	}
 	
 

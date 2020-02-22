@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.test.geonsu.domain.BoardVO;
 import com.test.geonsu.domain.Criteria;
+import com.test.geonsu.domain.SearchCriteria;
 
 public interface BoardDAO {
 	
@@ -24,5 +25,11 @@ public interface BoardDAO {
 	
 	//게시물갯수
 	public int listCount();	
+	
+	//검색결과
+	public List<BoardVO> listSearch(SearchCriteria scri);
+	
+	//검색결과 갯수
+	public int countSearch(SearchCriteria scri);
 
 }

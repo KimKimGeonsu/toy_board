@@ -10,9 +10,11 @@ $(function(){
 	var formObj = $("form[role='form']");	
 
 	$("#cancel").click(function(){
-		formObj.attr("action","/board/read?bno="+$("#bno").val());
-		formObj.attr("method","get");
-		formObj.submit();
+		self.location = "read?bno=${modify.bno}"
+			   + "&page=${scri.page}"
+			   + "&perPageNum=${scri.perPageNum}"
+			   + "&searchType=${scri.searchType}"
+			   + "&keyword=${scri.keyword}";
 	})
 	
 });
@@ -56,7 +58,7 @@ $(function(){
 				</p>
 				<p>
 					<button type="submit">수정</button>
-					<button id="cancel">취소</button>
+					<button type="button" id="cancel">취소</button>
 				</p>
 			</form>	
 		</section>

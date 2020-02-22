@@ -29,6 +29,13 @@ $(function() {
 		}
 	});
 	
+	//목록
+	$("#list_btn").click(function() {
+		self.location ="/geonsu/board/listSearch?"
+				+"page=${scri.page}&perPageNum=${scri.perPageNum}"
+				+"&searchType=${scri.searchType}&keyword=${scri.keyword}";
+	});
+	
 });
 
 
@@ -49,7 +56,11 @@ $(function() {
 		<section id="container">
 
 			<form role="form" method="post" autocomplete="off">
-
+				<input type="hidden" id="page" name="page" value="${scri.page}" readonly="readonly"/>
+				<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}" readonly="readonly"/>
+				<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}" readonly="readonly"/>
+				<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}" readonly="readonly"/>
+				
 				<p>
 					<label for="bno">글 번호</label><input type="text" id="bno" name="bno"
 						value="${read.bno}" readonly="readonly" />
@@ -70,6 +81,7 @@ $(function() {
 						value="${read.regDate}" pattern="yyyy-MM-dd" /></span>
 			</p>
 			<p>
+				<button id="list_btn">목록</button>
 				<button id="modify_btn">수정</button>
 				<button id="delete_btn">삭제</button>
 			</p>

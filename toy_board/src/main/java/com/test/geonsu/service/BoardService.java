@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.test.geonsu.domain.BoardVO;
 import com.test.geonsu.domain.Criteria;
+import com.test.geonsu.domain.SearchCriteria;
 
 public interface BoardService {
 	
@@ -24,5 +25,11 @@ public interface BoardService {
 	
 	//게시물갯수
 	public int listCount();
+	
+	//검색
+	public List<BoardVO> listSearch(SearchCriteria scri);
+	
+	//검색 결과갯수
+	public int countSearch(SearchCriteria scri);
 
 }

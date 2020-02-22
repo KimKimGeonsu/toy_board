@@ -51,4 +51,30 @@
  ]]>
  </select>
  
+ <!-- 검색 -->
+ <select id="listSearch" resultType="board" parameterType="scri">
+ select bno, title, content, writer, regDate, viewCnt from(
+ select bno, title, content, writer, regDate, viewCnt, row_number() over(order by bno desc) as rNum 
+ from myboard <include refid="search"></include>) mb 
+ where rNum between #{rowStart} and #{rowEnd} order by bno desc
+ </select>
+ 
+ <!-- 검색 참조 -->
+ <sql id="search">
+ <if test="searchType != null">
+ 	<if test="searchType == 't'.toString()"> where title like '%' || #{keyword} || '%'</if>
+ 	<if test="searchType == 'c'.toString()">where content like '%' || #{keyword} || '%'</if>
+ 	<if test="searchType == 'w'.toString()">where writer like '%' || #{keyword} || '%'</if>
+ 	<if test="searchType == 'tc'.toString()">where (title like '%' || #{keyword} || '%') or (content like '%' || #{keyword} || '%')</if>
+ </if>
+</sql>
+
+<!-- 검색 count -->
+<select id="countSearch" resultType="int">
+select count(bno) from myboard <include refid="search"></include>
+ <![CDATA[ and bno >0]]>
+</select>
+
+
+
 </mapper>
