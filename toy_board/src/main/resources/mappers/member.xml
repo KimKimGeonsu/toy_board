@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+
+<!-- 회원가입 -->
+<insert id="register">
+insert into myMember(userId, userPass, userName) values(#{userId}, #{userPass},#{userName})
+</insert>
+<!-- 로그인 -->
+<select id="login" resultType="member">
+select userId,userPass,userName,regDate from mymember where userId=#{userId} and userPass=#{userPass}
+</select>
+
+<!-- 회원정보수정 -->
+<update id="modify">
+update mymember set userPass=#{userPass} where userName = #{userName}
+</update>
+
+<!-- 회원탈퇴 -->
+<delete id="delete">
+delete from mymember where userId = #{userId} and userPass = #{userPass}
+</delete>
+
+
+<!-- 아이디확인 -->
+<select id="idCheck" resultType="member">
+select userId from myMember where userId =#{userId}
+</select>
+
+
+</mapper>

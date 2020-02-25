@@ -3,6 +3,7 @@ package com.test.geonsu.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,8 +36,15 @@ public class BoardController {
 	
 	//글작성 get
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
-	public void getWrtie() {
-		logger.info("get write");		
+	public void getWrtie(HttpSession session, Model model) {
+		logger.info("get write");	
+		Object loginInfo = session.getAttribute("member");
+		
+		if(loginInfo ==null) {
+			model.addAttribute("msg", "login_error");
+		}
+		
+		
 	}
 	
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
