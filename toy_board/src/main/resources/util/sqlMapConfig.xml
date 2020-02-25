@@ -6,7 +6,8 @@
 <typeAliases>
 <typeAlias type="com.test.geonsu.domain.BoardVO" alias="board"/>
 <typeAlias type="com.test.geonsu.domain.Criteria" alias="cri"/>
-<typeAlias type="com.test.geonsu.domain.SearchCriteria" alias="scri"/> 
+<typeAlias type="com.test.geonsu.domain.SearchCriteria" alias="scri"/>
+<typeAlias type="com.test.geonsu.domain.ReplyVO" alias="reply"/> 
 </typeAliases>
 
 	<mappers>
